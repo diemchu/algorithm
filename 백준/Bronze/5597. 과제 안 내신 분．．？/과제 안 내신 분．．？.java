@@ -1,16 +1,19 @@
-import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.stream.IntStream;
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int num ;
-        int arr [ ] = new int[30];
-        for(int i = 0 ; i < (arr.length - 2) ;i++){
-            num = sc.nextInt();
-            arr[num-1] = num;
-        }
-        for(int i = 0  ; i<arr.length ; i++){
-            if(arr[i] == 0) System.out.println(i+1);
-        }
-    }
+   public static void main(String[] args) {
+       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+       boolean[] done = new boolean[31];
+       reader.lines().limit(28)
+               .mapToInt(Integer::parseInt)
+               .forEach(i -> done[i] = true);
+
+       StringBuilder answer = new StringBuilder();
+       IntStream.range(1, done.length)
+               .forEach(i -> {
+                   if(!done[i]) answer.append(i).append('\n');
+               });
+       System.out.print(answer);
+   }
 }
